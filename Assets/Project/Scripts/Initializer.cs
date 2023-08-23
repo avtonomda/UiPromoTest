@@ -1,4 +1,7 @@
 using Grace.DependencyInjection;
+using RedPanda.Project.Interfaces;
+using RedPanda.Project.Providers.Interfaces;
+using RedPanda.Project.Providers.Realizations;
 using RedPanda.Project.Services;
 using RedPanda.Project.Services.Interfaces;
 using RedPanda.Project.Services.UI;
@@ -17,11 +20,13 @@ namespace RedPanda.Project
                 block.Export<UserService>().As<IUserService>().Lifestyle.Singleton();
                 block.Export<PromoService>().As<IPromoService>().Lifestyle.Singleton();
                 block.Export<UIService>().As<IUIService>().Lifestyle.Singleton();
+                block.Export<PromoAtlasesProvider>().As<IPromoAtlasesProvider>().Lifestyle.Singleton();
+                block.Export<RarityColorProvider>().As<IRarityColorProvider>().Lifestyle.Singleton();
             });
 
             _container.Locate<IUserService>();
             _container.Locate<IPromoService>();
-            _container.Locate<IUIService>().Show("LobbyView");
+            _container.Locate<IUIService>().Show($"{ScreenNames.LobbyView}");
         }
     }
 }

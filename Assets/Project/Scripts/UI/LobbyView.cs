@@ -1,3 +1,5 @@
+using RedPanda.Project.Interfaces;
+using RedPanda.Project.Providers.Interfaces;
 using RedPanda.Project.Services.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,13 +8,10 @@ namespace RedPanda.Project.UI
 {
     public sealed class LobbyView : View
     {
-        private const string PromoViewName = "PromoView";
-        
         [SerializeField] private Button _startButton;
 
         private IUIService _uiService;
-
-        //TODO: поменял с Awake на Start. Не уверен, что это хорошее решение
+        
         private void Start()
         {
             _uiService = Container.Locate<IUIService>();
@@ -22,8 +21,9 @@ namespace RedPanda.Project.UI
         }
 
         private void ShowPromo()
-        {
-            _uiService.Show(PromoViewName);
+        { 
+            _uiService.Close($"{ScreenNames.LobbyView}");
+            _uiService.Show($"{ScreenNames.PromoView}");
         }
     }
 }
