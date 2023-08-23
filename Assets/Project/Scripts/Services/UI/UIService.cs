@@ -10,7 +10,6 @@ namespace RedPanda.Project.Services.UI
         private readonly GameObject _canvas;
         private UIControl _viewControl;
 
-
         public UIService(IExportLocatorScope container)
         {
             _container = container;

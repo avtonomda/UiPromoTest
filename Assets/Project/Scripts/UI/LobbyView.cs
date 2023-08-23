@@ -1,14 +1,29 @@
-using RedPanda.Project.Services;
+using RedPanda.Project.Services.Interfaces;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace RedPanda.Project.UI
 {
     public sealed class LobbyView : View
     {
-        private void Awake()
+        private const string PromoViewName = "PromoView";
+        
+        [SerializeField] private Button _startButton;
+
+        private IUIService _uiService;
+
+        //TODO: поменял с Awake на Start. Не уверен, что это хорошее решение
+        private void Start()
         {
-            //Example for services
-            //var promoService = Container.Locate<IPromoService>();
-            //UIService.Close();
+            _uiService = Container.Locate<IUIService>();
+
+            _startButton.onClick.RemoveAllListeners();
+            _startButton.onClick.AddListener(ShowPromo);
+        }
+
+        private void ShowPromo()
+        {
+            _uiService.Show(PromoViewName);
         }
     }
 }
